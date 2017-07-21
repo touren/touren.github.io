@@ -1,14 +1,14 @@
 
-name: Wade Huang
-title: Wade Huang's Blog
-email: wadehuang36@gmail.com
-description: A technology enthusiast.<br/> Expert at .Net, Nodejs, Angular and Android.
-selfie: /assets/images/wade.jpg
+name: Tao Ren
+title: Tao Ren's Blog
+email: tour.ren.gz@gmail.com
+description: A technology enthusiast.<br/> Expert at Live Streaming, Ember, and Android.
+selfie: /assets/images/selfie.jpg
 logo: /assets/images/logo.png
 baseurl: ""
-url: "https://wadehuang36.github.io"
-github:  wadehuang36
-linkedin:  wadehuang
+url: "https://touren.github.io"
+github:  touren
+linkedin:  taoren
 
 
 markdown: kramdown
@@ -18,10 +18,10 @@ paginate: 10
 paginate_path: "/page:num/"
 
 disqus:
-  shortname: wadeblog
+  shortname: taoblog
 
-google-analytics: 'UA-101876196-1'
-google-cse: '000081450704203220197:elblxastjvi'
+google-analytics: 'UA-102950168-1'
+google-cse: '000110185879055609612:xdyjng5hwge'
 
 gems:
   - jekyll-feed
