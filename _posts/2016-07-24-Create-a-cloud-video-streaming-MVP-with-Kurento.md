@@ -7,30 +7,28 @@ With [WebRTC](https://webrtc.org/) technology, people can easily stream their li
 To run the demo program: license plate detector, all we need are an Ubuntu box and a web browser.(OK, not any browser, just Chrome, Firefox or Opera.)
 
 Install kurento server on the Ubuntu box:
-
-echo "deb[ http://ubuntu.kurento.org](http://ubuntu.kurento.org/) trusty-dev kms6" | sudo tee /etc/apt/sources.list.d/kurento-dev.listwget -O -[ http://ubuntu.kurento.org/kurento.gpg.key](http://ubuntu.kurento.org/kurento.gpg.key) | sudo apt-key add -sudo apt-get updatesudo apt-get install kurento-media-server-6.0-dev
-
+```
+echo "deb[ http://ubuntu.kurento.org](http://ubuntu.kurento.org/) trusty-dev kms6" | sudo tee /etc/apt/sources.list.d/kurento-dev.list
+wget -O -[ http://ubuntu.kurento.org/kurento.gpg.key](http://ubuntu.kurento.org/kurento.gpg.key) | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install kurento-media-server-6.0-dev
 sudo apt-get install kms-platedetector-6.0
-
-sudo apt-get install libboost-all-dev libjson-glib-dev bison flex uuid-dev libsoup2.4-dev build-essential libtool autotools-dev  automake git libtesseract-dev
-
+sudo apt-get install libboost-all-dev libjson-glib-dev bison flex uuid-dev libsoup2.4-dev build-essential libtool autotools-dev  automake git libtesseract-dev
 sudo service kurento-media-server-6.0 start
+```
 
 Install kurento tutorial nodejs on the Ubuntu box:
 
-curl -sL https://deb.nodesource.com/setup | sudo bash -sudo apt-get install -y nodejs
-
+```
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
 sudo npm install npm -g
-
 git clone [https://github.com/Kurento/kurento-tutorial-js.git](https://github.com/Kurento/kurento-tutorial-js.git)
-
 cd kurento-tutorial-js/kurento-platedetector
-
 http-server -p 8443 -S -C keys/server.crt -K keys/server.key
-
 npm install
-
 npm start
+```
 
 Open link [https://localhost:8443](https://localhost:8443) in web browser and check the result:
 
@@ -44,14 +42,12 @@ Hmmm, not so accurate, but it does work.
 
 Let’s dip into the source project to see how that works. Pull the project from github and build it.
 
-git clone [https://github.com/Kurento/kms-platedetector.git](https://github.com/Kurento/kms-platedetector.git)
-
+```
+git clone https://github.com/Kurento/kms-platedetector.git
 cd kms-platedetector/src
-
 cmake ..
-
 make
-
+```
 There are two folders: kms-platedetector/src
 
 gst-plugins/		implements a **gstreamer plugin**: platedetector
@@ -134,6 +130,7 @@ Some tips for developing Kurento applications:
 
 * Debug your Kurento application using the runtime pipeline map. If you have some problem, try to dump the pipeline runtime to a dot file and check it out. e.g.
 
+```
 presenter.pipeline.getGstreamerDot(function(err, ret){
 
         var fs = require('fs');
@@ -145,6 +142,7 @@ presenter.pipeline.getGstreamerDot(function(err, ret){
         });
 
 });
+```
 
 ![image alt text](/assets/images/mvp_with_kurento/image_8.png)
 
