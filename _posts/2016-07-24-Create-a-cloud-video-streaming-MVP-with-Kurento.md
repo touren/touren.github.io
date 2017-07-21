@@ -34,11 +34,11 @@ npm start
 
 Open link [https://localhost:8443](https://localhost:8443) in web browser and check the result:
 
-![image alt text](image_0.png)
+![image alt text](/assets/images/mvp_with_kurento/image_0.png)
 
 Hmmm, not so accurate, but it does work.
 
-![image alt text](image_1.png) ⇒  ![image alt text](image_2.png)
+![image alt text](/assets/images/mvp_with_kurento/image_1.png) ⇒  ![image alt text](/assets/images/mvp_with_kurento/image_2.png)
 
 ## Close-up
 
@@ -62,7 +62,7 @@ The Kurento server is controlled by web browser using Kurento Protocol, based on
 
 The Kurento Server will do the WebRTC stuff for you, so you don’t need to worry about the details of stream encode/decode, NAT traversal, which are really, really fuzzy.
 
-![image alt text](image_3.png)
+![image alt text](/assets/images/mvp_with_kurento/image_3.png)
 
 Kurento provides a tool to create the above plugin structure, which is kurento-module-scaffold. You can use this tool to create two flavors of Kurento modules:
 
@@ -96,7 +96,7 @@ GStreamer is a framework for creating streaming media applications. The fundamen
 
 The GStreamer framework is designed to make it easy to write applications that handle audio or video or both. The pipeline design is made to have little overhead above what the applied filters induce. This makes GStreamer a good framework for designing even high-end audio applications which put high demands on latency.
 
-![image alt text](image_4.png)
+![image alt text](/assets/images/mvp_with_kurento/image_4.png)
 
 Many of the virtues of the GStreamer framework come from its modularity: GStreamer can seamlessly incorporate new plugin modules. But because modularity and power often come at a cost of greater complexity, writing new applications is not always easy.
 
@@ -108,19 +108,19 @@ Now, let’s take a look at the functions(in gst-plugins/platedetector/kmsplated
 
 It’s the function called when a plugin first created, and usually do some class initialization jobs like installing some override methods, such as getter/setter, finalize/dispose, adding pad template, registering private structure, etc.
 
-![image alt text](image_5.png)
+![image alt text](/assets/images/mvp_with_kurento/image_5.png)
 
 **static void init ()**
 
 It’s the function called every time a plugin created, and usually do some object initialization jobs like setting default value to plugin’s parameters, creating other resources, such as plugins, files, fonts, etc.
 
-![image alt text](image_6.png)
+![image alt text](/assets/images/mvp_with_kurento/image_6.png)
 
 **static GstFlowReturn transform_frame_ip (GstVideoFilter *filter, GstVideoFrame *frame)**
 
 It’s the function called every time a new frame comes, and usually do some image operation like analyzing the incoming frame, drawing something on it, mixing other input frames into one, etc.
 
-![image alt text](image_7.png)
+![image alt text](/assets/images/mvp_with_kurento/image_7.png)
 
 This is the most important function you need to handle, but the incoming frame is presented as GstVideoFrame, which is not so easy to deal with, unless you really fancy the bitwise operations. Here comes OpenCV, which is a convenient tool to process the image with its rich computer vision and machine learning algorithms, and it’s straightforward and no-performance-cost to transform GstVideoFrame to Image objects, like Mat, IplImage, in OpenCV.
 
@@ -146,7 +146,7 @@ presenter.pipeline.getGstreamerDot(function(err, ret){
 
 });
 
-![image alt text](image_8.png)
+![image alt text](/assets/images/mvp_with_kurento/image_8.png)
 
 * Find a similarly plugin first before you want to create a new one, because there are plenty of open source plugin there, even you can not find a suitable one, you can learn something from these source code.
 
