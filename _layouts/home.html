@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+{% include head.html %}
+<body>
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    {% include bio.html %}
+
+    <div class="home">
+      {% include google-cse.html %}
+      <ul class="tabs">
+        <li class="tab active">
+          <a href="#tab-content-post" >Posts</a>
+        </li>
+        <li class="tab">
+          <a href="#tab-content-project">Projects</a>
+        </li>
+      </ul>
+      <div class="tab-contents">
+        <div id="tab-content-post" class="tab-content active">
+          {% include posts.html %}
+        </div>
+        <div id="tab-content-project" class="tab-content">
+          {% include projects.html %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include footer.html %}
+{% include icons.html %}
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+.header-home {
+  display: block;
+  margin: 30px auto 45px auto;
+  padding-bottom: 25px;
+  text-align: center;
+  position: relative;
+  z-index: 99;
+  border-bottom: 1px solid $epsilon;
+
+  > {
+    .link > .selfie {
+      width: 125px;
+      margin-bottom: 25px;
+      border-radius: 100%;
+      transition: all .2s;
+      box-shadow: 0;
+      opacity: 1;
+      &:hover {
+        box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.18), 0 0px 12px 0 rgba(0, 0, 0, 0.15);
+        opacity: .8;
+      }
+    }
+    .title {
+      font-size: 2rem;
+      margin: 0 0 13px;
+    }
+    .description {
+      font-size: 1rem;
+      font-weight: 300;
+      font-style: normal;
+      color: $gama;
+      width: 70%;
+      margin: 0 auto 30px;
+      a {
+        font-weight: 200;
+      }
+    }
+  }
+}
+
+.header-home::after{
+    display: block;
+    content: " ";
+    width: 7px;
+    height: 7px;
+    border: #ededed 1px solid;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    background: #FFF;
+    box-shadow: #FFF 0 0 0 5px;
+    border-radius: 3px;
+}
