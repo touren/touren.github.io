@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a cloud video streaming MVP with Kurento
-description: An example of building your first video streaming MVP.
+description: An example of building your first video streaming Minimum Viable Product(MVP).
 tags: 
     - Kurento
     - Live Streaming
