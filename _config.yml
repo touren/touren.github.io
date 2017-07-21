@@ -1,0 +1,39 @@
+
+name: Wade Huang
+title: Wade Huang's Blog
+email: wadehuang36@gmail.com
+description: A technology enthusiast.<br/> Expert at .Net, Nodejs, Angular and Android.
+selfie: /assets/images/wade.jpg
+logo: /assets/images/logo.png
+baseurl: ""
+url: "https://wadehuang36.github.io"
+github:  wadehuang36
+linkedin:  wadehuang
+
+
+markdown: kramdown
+
+paginate: 10
+
+paginate_path: "/page:num/"
+
+disqus:
+  shortname: wadeblog
+
+google-analytics: 'UA-101876196-1'
+google-cse: '000081450704203220197:elblxastjvi'
+
+gems:
+  - jekyll-feed
+  - jekyll-paginate
+  # - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - dist

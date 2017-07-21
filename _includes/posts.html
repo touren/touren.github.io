@@ -1,0 +1,31 @@
+<ul class="post-list">
+  {% for post in paginator.posts %}
+  <li itemscope itemtype='http://schema.org/BlogPosting'>
+    <span class="post-meta" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+    <span class="post-heading" itemprop="name headline">
+      <a class="post-link" itemprop="url" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </span>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="hide" >{{ site.name }}</span></span>
+    {% if post.description %}
+    <span class="post-meta" itemprop="description">{{ post.description | escape }}</span>
+    {% endif %}
+
+  </li>
+  {% endfor %}
+</ul>
+
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+  {% else %}
+    <span class="previous">Previous</span>
+  {% endif %}
+  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+  {% else %}
+    <span class="next ">Next</span>
+  {% endif %}
+</div>

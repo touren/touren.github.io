@@ -1,0 +1,1 @@
+docker run --name jekyll --rm -v ${pwd}:/site jekyll/jekyll jekyll build -s /site -d /site/dist

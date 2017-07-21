@@ -1,0 +1,10 @@
+<header class="header-home animated">
+  <a class="link" href="http://linkedin.com/in/{{ site.linkedin }}">
+    <img class="selfie" alt="{{ site.name }}" src="{{ site.selfie | relative_url }}" />
+  </a>
+
+  <h1 class="title">{{ site.name }}</h1>
+  <h2 class="description">{{ site.description }}</h2>
+
+  {% include social-links.html %}
+</header>
