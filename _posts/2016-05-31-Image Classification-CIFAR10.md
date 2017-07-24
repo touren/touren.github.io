@@ -1,3 +1,13 @@
+---
+layout: post
+title: Image Classification-CIFAR10
+description: Using CNN to do image classification-CIFAR10
+tags:
+    - CNN
+    - Image Classification
+    - CIFAR10
+---
+
 Image Classification
 
                                                                         May
