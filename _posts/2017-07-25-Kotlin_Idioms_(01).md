@@ -12,10 +12,12 @@ tags:
 
 Given a list of Strings ending as #nnnn, nnnn is a integer representing it's serial ID, find the next serial ID.
 For example: 
+```
     [] ==> 1
     [""] ==> 1
     ["Object#1", "Object#1"] ==> 2
     ["Object#1", "Object#5", "Object#3"] ==> 6
+```
 
 ## Java Solution
 ```
