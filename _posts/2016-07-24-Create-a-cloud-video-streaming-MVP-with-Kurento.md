@@ -10,8 +10,6 @@ tags:
     - MVP
 ---
 
-# Create a cloud video streaming MVP with Kurento
-
 With [WebRTC](https://webrtc.org/) technology, people can easily stream their live video and audio content just using a web browser. If you have a cloud video streaming idea and want to build a **Minimum Viable Product**(MVP), [Kurento](https://www.kurento.org/) is the choice. With Kurento, you’d be able to handle the streaming audio/video easily, including analyzing, mixing, augmentation, etc. Kurento is a WebRTC server infrastructure, based on gstreamer. With its seamless [OpenCV](http://opencv.org/) integration, you can process the video frame by frame quite handily. Kurento now is a developing project and updates very often, so fasten your seatbelt. I am trying to show you how Kurento works by a simple demo program: license plate detector. 
 
 ## Let’s get our hands dirty
