@@ -11,6 +11,20 @@ tags:
 
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
+``` hbs
+// in template.hbs
+{{#each campaign.inventories as |inventory|}}
+  <strong>{{inventory.title}},{{inventory.price}}</strong>
+{{/each}}</td>
+```
+
+``` html
+// in template.hbs
+{{#each campaign.inventories as |inventory|}}
+  <strong>{{inventory.title}},{{inventory.price}}</strong>
+{{/each}}</td>
+```
+
 ## Why Ember?
 
 * Support MVVM, two-way Data-binding (NOTE:  Ember 2.0 is embracing Data Down, Actions Up (DDAU) approach instead.):
@@ -226,12 +240,6 @@ function deleteInventories(inventories) {
 function findCampaign(campaign_id) {
   return store.findRecord('campaign', campaign_id);
 }
-```
-```hbs
-// in template.hbs
-{{#each campaign.inventories as |inventory|}}
-  <strong>{{inventory.title}},{{inventory.price}}</strong>
-{{/each}}</td>
 ```
 
 Inventories within the campaign will automatically be loaded when template try to show them. ([more detail](http://stackoverflow.com/questions/30219519/ember-js-loading-related-models-directly?answertab=votes#tab-top)), though one request to server per inventory. For efficiency, you can use Ember sideload to include all data in one-to-many relationship by one request. ([JSON-API correct handling of included entities #3380](https://github.com/emberjs/data/issues/3380))
