@@ -11,40 +11,6 @@ tags:
 
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
-// in template.hbs
- {% raw %}
- {{#each campaign.inventories as |inventory|}}
-  <strong>{{inventory.title}},{{inventory.price}}</strong>
-{{/each}}</td>
-{% endraw %}
-
-```javascript
-{% raw %}
-// in template.hbs
-{{#each campaign.inventories as |inventory|}}
-  <strong>{{inventory.title}},{{inventory.price}}</strong>
-{{/each}}</td>
-{% endraw %}
-```
-
-```html
-{% raw %}
-// in template.hbs
-{{#each campaign.inventories as |inventory|}}
-  <strong>{{inventory.title}},{{inventory.price}}</strong>
-{{/each}}</td>
-{% endraw %}
-```
-
-```hbs
-{% raw %}
-// in template.hbs
-{{#each campaign.inventories as |inventory|}}
-  <strong>{{inventory.title}},{{inventory.price}}</strong>
-{{/each}}</td>
-{% endraw %}
-```
-
 ## Why Ember?
 
 * Support MVVM, two-way Data-binding (NOTE:  Ember 2.0 is embracing Data Down, Actions Up (DDAU) approach instead.):
@@ -424,7 +390,8 @@ export default function validateDateBeforeThan({ than, amount = 0, units = 'h' }
 
 Once you set value to a property of the changeset or changeset.validate(), the validation will be happened to the property or all properties, and you can check the status and show the error messages if there were.
 
-```javascript
+```hbs
+{% raw %}
 //app/templates/components/campaign-date-select.hbs
 ...
       {{#grid-col medium=3 class="campaign-datepicker" }}
@@ -432,10 +399,12 @@ Once you set value to a property of the changeset or changeset.validate(), the v
         {{validation-errors changeset=campaignChangeset property="startDate"}}
       {{/grid-col}}
 ...
+{% endraw %}
 ```
 
 
-```javascript
+```hbs
+{% raw %}
 //app/templates/components/validation-errors.hbs
 {{#liquid-if (get changeset.error property)}}
   <span class="is-visible form-error">
@@ -446,6 +415,7 @@ Once you set value to a property of the changeset or changeset.validate(), the v
     </ul>
   </span>
 {{/liquid-if}}
+{% endraw %}
 ```
 
 
