@@ -605,7 +605,6 @@ export default Ember.Component.extend({
 {{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}
 ```
 
-
 ```javascript
 //app/routes/application.js (Route)
 import Ember from 'ember';
@@ -618,7 +617,6 @@ export default Ember.Route.extend({
   }
 });
 ```
-{% endraw %}
 
 
 ### Handling Action Completion
