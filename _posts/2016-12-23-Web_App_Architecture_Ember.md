@@ -621,7 +621,7 @@ export default Ember.Route.extend({
 
 Often [Closure Actions](http://emberjs.com/blog/2015/06/12/ember-1-13-0-released.html#toc_closure-actions) perform asynchronous tasks, such as making an ajax request to a server. You return a [Promise](http://emberjs.com/api/classes/RSVP.Promise.html) from these actions to handle completion.
 
-```javascript
+```hbs
 //app/templates/components/episode-table-select.hbs (Component)
 <a href="#" class="button primary expanded hollow" {{action "viewmore"}}>
   {{#if isLoading}}{{loading-spinner}}{{/if}} View More
@@ -646,16 +646,15 @@ export default Ember.Component.extend({
 ```
 
 
-```javascript
+```hbs
 //app/templates/campaigns/list.hbs (Container Component)
 {{episode-table-select model=model.episodes onviewmore=(action "getMoreEpisodes") }} 
-
+```
 Or
-
+```hbs
 //app/templates/campaigns/list.hbs (Route)
 {{episode-table-select model=model.episodes onviewmore=(action (route-action "getMoreEpisodes")) }} 
 ```
-
 
 ```javascript
 //app/routes/campaigns/list.js (Component or Route)
@@ -672,7 +671,6 @@ export default Ember.Route.extend({
   }
 });
 ```
-
 
 ## Application Concerns
 
@@ -715,7 +713,7 @@ An Ember.Service is an Ember object that lives for the duration of the applicati
 
 Services are useful for features that require shared state or persistent connections. Example uses of services might include: User/session authentication; Geolocation; WebSockets; Server-sent events or notifications; Server-backed API calls that may not fit Ember Data; Third-party APIs; Logging. To create a service, run:
 
-```javascript
+```
 ember generate service stripe
 ```
 
@@ -748,7 +746,7 @@ export default Ember.Service.extend({
 
 Let’s say we want to do 2 acceptance tests: register a user, list a user’s campaigns. Run "ember generate acceptance-test <name>" to to create an acceptance test,
 
-```javascript
+```
 ember generate acceptance-test register
 ```
 
@@ -782,7 +780,7 @@ test('visiting /register', function(assert) {
 
 Similar to campaigns acceptance test,
 
-```javascript
+```
 ember generate acceptance-test campaigns
 ```
 
@@ -828,7 +826,7 @@ export function authenticateSession() {
 
 Start the test server: ember test --server
 
-```javascript
+```
 ember test --server
 ```
 
@@ -849,43 +847,46 @@ The acceptance test of campaigns passed because we login (by authenticating the 
 
 # Install add-ons
 
+```
 ember install ember-cli-deploy
-
 ember install ember-cli-deploy-build
-
 ember install ember-cli-deploy-s3
-
 ember install ember-cli-deploy-s3-index ember-cli-deploy-revision-data ember-cli-deploy-display-revisions
 ember install ember-cli-deploy-gzip
-
 ember install ember-cli-deploy-manifest
+```
 
 # Deploy using ‘production’ config.
 
+```
 ember deploy production
+```
 
 # Deploy and Active production
 
+```
 ember deploy --activate=true production
+```
 
 # Check deployed reversions
 
+```
 ember deploy:list production
 
--   timestamp           | revision                       _
+   timestamp           | revision                       
 
-- =================================                      _	
+ =================================                      	
 
--   2016/11/18 17:11:04 | 3ce9112a62d4eaefbc9f0d55cf82d3d0 
+   2016/11/18 17:11:04 | 3ce9112a62d4eaefbc9f0d55cf82d3d0 
 
--   2016/11/18 11:14:44 | b8b43c20be73530e561e3608b6c9d63c 
+   2016/11/18 11:14:44 | b8b43c20be73530e561e3608b6c9d63c 
 
--   2016/11/17 10:10:41 | a6c4d9d94f7b36ab9874ff821e59e912 
+   2016/11/17 10:10:41 | a6c4d9d94f7b36ab9874ff821e59e912 
 
--   2016/11/14 21:47:17 | 5f4394c83b11201ed70836d308606323 
+   2016/11/14 21:47:17 | 5f4394c83b11201ed70836d308606323 
 
-- > 2016/11/14 21:05:04 | f8216619c2d2897d83e8a614c4d3c8f5 
-
+ > 2016/11/14 21:05:04 | f8216619c2d2897d83e8a614c4d3c8f5 
+```
 # Active a reversion
 
 ember deploy:activate production --revision f8216619c2d2897d83e8a614c4d3c8f5
