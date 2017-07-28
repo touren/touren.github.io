@@ -47,14 +47,15 @@ Ember templates use the syntax of [Handlebars](http://handlebarsjs.com/) templat
 
 Templates can also display properties provided to them from their context, which is either a component or a route (technically, a controller presents the model from the route to the template, but this is rarely used in modern Ember apps and will be deprecated soon). For example:
 
-```
+{% raw %}
+```hbs
  <div>Hi {{name}}, this is a valid Ember template!</div></td>
 ```
 
 Here, `{{name}}` is a property provided by the template's context.
 
 Besides properties, double curly braces `{{}}` may also contain helpers and components, which we'll discuss later.
-
+{% endraw %}
 **_We can think of Template as View in MVVM_**
 
 ### Components
@@ -519,7 +520,8 @@ export default Ember.Route.extend({
 
 3. Component → Container Component
 
-```javascript
+{% raw %}
+```hbs
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 ```
@@ -527,10 +529,13 @@ export default Ember.Route.extend({
 
 or
 
-```javascript
+```hbs
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
+```
+{% endraw %}
 
+```javascript
 //app/components/campaign-row.js (Component)
 import Ember from 'ember';
 export default Ember.Route.extend({
@@ -543,11 +548,12 @@ export default Ember.Route.extend({
 });
 ```
 
-
-```javascript
+{% raw %}
+```hbs
 //app/templates/components/campaign-table-select.hbs (Container)
 {{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}
 ```
+{% endraw %}
 
 
 ```javascript
@@ -568,18 +574,22 @@ export default Ember.Component.extend({
 
 4. Component → Route Handler
 
-```javascript
+{% raw %}
+```hbs
 //app/templates/components/creative-select.hbs (Component)
 <a href="#" {{action onremove this)}}>Remove Creative</a>
 ```
+{% endraw %}
 
 
 or
 
-```javascript
+```hbs
 //app/templates/components/creative-select.hbs (Component)
 <a href="#" {{action 'removeCreative' this}}>Remove Creative by Handler</a>
+```
 
+```javascript
 //app/components/creative-select.js (Component)
 import Ember from 'ember';
 export default Ember.Component.extend({
@@ -592,7 +602,7 @@ export default Ember.Component.extend({
 ```
 
 
-```javascript
+```hbs
 //app/templates/components/campaign-edit.hbs (Container)
 {{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}
 ```
@@ -610,6 +620,7 @@ export default Ember.Route.extend({
   }
 });
 ```
+{% endraw %}
 
 
 ### Handling Action Completion
