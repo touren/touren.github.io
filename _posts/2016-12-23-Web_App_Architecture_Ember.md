@@ -1,4 +1,13 @@
-# Web App Architecture
+---
+layout: post
+title: Web App Architecture - Ember
+description: How to use Ember to build a web app.
+tags: 
+    - Ember
+    - Web App Architecture
+    - Data Binding
+    - MVVM
+---
 
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
@@ -38,16 +47,13 @@ Ember templates use the syntax of [Handlebars](http://handlebarsjs.com/) templat
 
 Templates can also display properties provided to them from their context, which is either a component or a route (technically, a controller presents the model from the route to the template, but this is rarely used in modern Ember apps and will be deprecated soon). For example:
 
-<table>
-  <tr>
-    <td><div>Hi {{name}}, this is a valid Ember template!</div></td>
-  </tr>
-</table>
+```
+ <div>Hi {{name}}, this is a valid Ember template!</div></td>
+```
 
+Here, `{{name}}` is a property provided by the template's context.
 
-Here, {{name}} is a property provided by the template's context.
-
-Besides properties, double curly braces ({{}}) may also contain helpers and components, which we'll discuss later.
+Besides properties, double curly braces `{{}}` may also contain helpers and components, which we'll discuss later.
 
 **_We can think of Template as View in MVVM_**
 
@@ -93,24 +99,17 @@ Once the request to the server returns with a JSON payload, the adapter resolves
 
 A model is a class that defines the properties and behavior of the data that you present to the user. To create a model, e.g a campaign, run:
 
-<table>
-  <tr>
-    <td>ember generate model campaign</td>
-  </tr>
-</table>
-
+```
+ember generate model campaign
+```
 
 This will generate the following file:
-
-<table>
-  <tr>
-    <td>//app/models/campaign.js
+```javascript
+//app/models/campaign.js
 import Ember from 'ember';
 export default DS.Model.extend({
-});</td>
-  </tr>
-</table>
-
+});
+```
 
 After you have defined a model class, you can start [finding](https://guides.emberjs.com/v2.9.0/models/finding-records) and [working with records](https://guides.emberjs.com/v2.9.0/models/creating-updating-and-deleting-records) of that type.
 
@@ -122,9 +121,8 @@ Let’s focus on one-to-many relationships. Let’s say we have two data models:
 
 [inventory](https://github.com/swarmnyc/AppTalks/blob/ads/dev/AdPortal/frontend/app/models/campaign-episode.js) ---(belongsTo)---> campaign as campaign;
 
-<table>
-  <tr>
-    <td>//app/models/campaign.js
+```javascript
+//app/models/campaign.js
 import Ember from 'ember';
 export default DS.Model.extend({
   name: attr('string'),
@@ -132,32 +130,26 @@ export default DS.Model.extend({
   endDate: attr('date'),
   status: attr('string', { defaultValue: 'Draft' }),
   inventories: hasMany('inventory'),
-});</td>
-  </tr>
-</table>
+});
+```
 
-
-<table>
-  <tr>
-    <td>//app/models/campaign.jsapp/models/inventory.js
+```javascript
+//app/models/campaign.jsapp/models/inventory.js
 import Ember from 'ember';
 export default DS.Model.extend({
   title: attr('string'),
   price: attr('number'),
   target: attr('number'),
   campaign: belongsTo('campaign'),
-});</td>
-  </tr>
-</table>
-
+});
+```
 
 Here are some scenarios you will manipulate the relationship.
 
 * Create new campaign and a few new inventories;
 
-<table>
-  <tr>
-    <td>function createCampaignWithInventories(inventories) {
+```javascript
+function createCampaignWithInventories(inventories) {
   let campaign = store.createRecord('campaign');
   let inventory = store.createRecord('inventory');
   inventories.addObject(inventory);
@@ -171,31 +163,26 @@ Here are some scenarios you will manipulate the relationship.
     this.set('showWaitingSpinner', false);
     this.set('errorMessage', err);
   });
-}</td>
-  </tr>
-</table>
-
+}
+```
 
 * Update campaign’s attributes;
 
-<table>
-  <tr>
-    <td>function updateCampaign(campaign) {
+```javascript
+function updateCampaign(campaign) {
   this.set('showWaitingSpinner', true);
   campaign.set('name', 'Amazing Campaign');
   campaign.save().then( () => {
     this.set('showWaitingSpinner', false);
   });
-}</td>
-  </tr>
-</table>
+}
+```
 
 
 * Update attributes within some inventories:
 
-<table>
-  <tr>
-    <td>function updateInventories(inventories) {
+```javascript
+function updateInventories(inventories) {
   this.set('showWaitingSpinner', true);
   inventories.forEach( (inventory) => {
     inentory.set('price', 0.12);
@@ -203,16 +190,13 @@ Here are some scenarios you will manipulate the relationship.
   Ember.RSVP.all(inventories.invoke('save')).then( () => { 
     this.set('showWaitingSpinner', false);
   });
-}</td>
-  </tr>
-</table>
-
+}
+```
 
 * Insert a few new inventories to an existing campaign:
 
-<table>
-  <tr>
-    <td>function addInventories(campaign, inventories) {
+```javascript
+function addInventories(campaign, inventories) {
   this.set('showWaitingSpinner', true);
   let inventory = store.createRecord('inventory');
   inventories.addObject(inventory);
@@ -222,39 +206,31 @@ Here are some scenarios you will manipulate the relationship.
   Ember.RSVP.all(inventories.invoke('save')).then( () => { 
     this.set('showWaitingSpinner', false);
   });
-}</td>
-  </tr>
-</table>
-
+}
+```
 
 * Delete a few inventories from an existing campaign:
 
-<table>
-  <tr>
-    <td>function deleteInventories(inventories) {
+```javascript
+function deleteInventories(inventories) {
   this.set('showWaitingSpinner', true);
   Ember.RSVP.all(inventories.invoke('destroyRecord')).then( () => { 
     this.set('showWaitingSpinner', false);
   });
-}</td>
-  </tr>
-</table>
-
+}
+```
 
 * Load a campaign and its inventories:
 
-<table>
-  <tr>
-    <td>function findCampaign(campaign_id) {
+```javascript
+function findCampaign(campaign_id) {
   return store.findRecord('campaign', campaign_id);
 }
 // in template.hbs
 {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
 {{/each}}</td>
-  </tr>
-</table>
-
+```
 
 Inventories within the campaign will automatically be loaded when template try to show them. ([more detail](http://stackoverflow.com/questions/30219519/ember-js-loading-related-models-directly?answertab=votes#tab-top)), though one request to server per inventory. For efficiency, you can use Ember sideload to include all data in one-to-many relationship by one request. ([JSON-API correct handling of included entities #3380](https://github.com/emberjs/data/issues/3380))
 
@@ -262,9 +238,8 @@ Inventories within the campaign will automatically be loaded when template try t
 
 In a nutshell, computed properties let you declare functions as properties. You create one by defining a computed property as a function, which Ember will automatically call when you ask for the property. You can then use it the same way you would any normal, static property.
 
-<table>
-  <tr>
-    <td>//app/models/inventory.js
+```javascript
+//app/models/inventory.js
 import Ember from 'ember';
 export default DS.Model.extend({
   title: attr('string'),
@@ -273,16 +248,14 @@ export default DS.Model.extend({
   priceWithDollar: Ember.computed(price, function() {
     return '$' + this.get(price);
   }),
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 It's super handy for taking one or more normal properties and transforming or manipulating their data to create a new value.
 
-<table>
-  <tr>
-    <td>import Ember from 'ember';
+```javascript
+import Ember from 'ember';
 export default DS.Model.extend({
   title: attr('string'),
   price: attr('number'),
@@ -290,16 +263,13 @@ export default DS.Model.extend({
   cost: Ember.computed('price', 'target', function() {
     return Math.round(this.get('price') * this.get('target') * 100) / 100;
   }),
-});</td>
-  </tr>
-</table>
-
+})
+```
 
 Computed properties, by default, observe any changes made to the properties they depend on and are dynamically updated when they're called. Let's use computed properties to dynamically update.
 
-<table>
-  <tr>
-    <td>function test() {
+```javascript
+function test() {
   inventory.set('price', 1.0);
   inventory.set('target', 1000);
   inventory.get('cost'); // return 1000.0
@@ -307,16 +277,13 @@ Computed properties, by default, observe any changes made to the properties they
 
   inventory.set('price', 2.0);
   inventory.get('cost'); // return 2000.0
-}</td>
-  </tr>
-</table>
-
+}
+```
 
 Sometimes you have a computed property whose value depends on the properties of items in an array.
 
-<table>
-  <tr>
-    <td>//app/components/campaign-episode-cost-subtotal.js
+```javascript
+//app/components/campaign-episode-cost-subtotal.js
 import Ember from 'ember';
 export default Ember.Component.extend({
   sumCost: Ember.computed("model.@each.target", function() {
@@ -327,16 +294,13 @@ export default Ember.Component.extend({
     });
     return sumCost.toFixed(2);
   }),
-});</td>
-  </tr>
-</table>
-
+});
+```
 
 Or you can use computed macro to filter an array by the keyword. You will get a new filter array whenever the keyword or original array changed.
 
-<table>
-  <tr>
-    <td>//app/components/campaign-table-select.js
+```javascript
+//app/components/campaign-table-select.js
 import Ember from 'ember';
 export default Ember.Component.extend({
   filteredModel: Ember.computed.filter('model', function(item) {
@@ -349,10 +313,8 @@ export default Ember.Component.extend({
     }
     return item.get('name').includes(keyword);
   }).property('keyword', 'model.[]'),
-});</td>
-  </tr>
-</table>
-
+});
+```
 
 ### Changeset and Validations
 
@@ -953,7 +915,8 @@ ember install ember-cli-deploy-build
 
 ember install ember-cli-deploy-s3
 
-ember install ember-cli-deploy-s3-index ember-cli-deploy-revision-data ember-cli-deploy-display-revisionsember install ember-cli-deploy-gzip
+ember install ember-cli-deploy-s3-index ember-cli-deploy-revision-data ember-cli-deploy-display-revisions
+ember install ember-cli-deploy-gzip
 
 ember install ember-cli-deploy-manifest
 
