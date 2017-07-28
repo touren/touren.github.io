@@ -9,6 +9,7 @@ tags:
     - MVVM
 ---
 
+{% raw %}
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
 ## Why Ember?
@@ -47,15 +48,14 @@ Ember templates use the syntax of [Handlebars](http://handlebarsjs.com/) templat
 
 Templates can also display properties provided to them from their context, which is either a component or a route (technically, a controller presents the model from the route to the template, but this is rarely used in modern Ember apps and will be deprecated soon). For example:
 
-{% raw %}
 ```hbs
  <div>Hi {{name}}, this is a valid Ember template!</div></td>
 ```
-{% endraw %}
 
-Here, {% raw %}`{{name}}`{% endraw %} is a property provided by the template's context.
 
-Besides properties, double curly braces {% raw %}`{{}}`{% endraw %} may also contain helpers and components, which we'll discuss later.
+Here, `{{name}}` is a property provided by the template's context.
+
+Besides properties, double curly braces `{{}}` may also contain helpers and components, which we'll discuss later.
 
 **_We can think of Template as View in MVVM_**
 
@@ -392,7 +392,7 @@ export default function validateDateBeforeThan({ than, amount = 0, units = 'h' }
 
 Once you set value to a property of the changeset or changeset.validate(), the validation will be happened to the property or all properties, and you can check the status and show the error messages if there were.
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-date-select.hbs
 ...
@@ -402,10 +402,10 @@ Once you set value to a property of the changeset or changeset.validate(), the v
       {{/grid-col}}
 ...
 ```
-{% endraw %}
 
 
-{% raw %}
+
+
 ```hbs
 //app/templates/components/validation-errors.hbs
 {{#liquid-if (get changeset.error property)}}
@@ -418,7 +418,7 @@ Once you set value to a property of the changeset or changeset.validate(), the v
   </span>
 {{/liquid-if}}
 ```
-{% endraw %}
+
 
 
 Without using changeset, both two-way binding and DDAU will change the campaign name in  the campaign list and dialog.
@@ -476,12 +476,12 @@ Events are triggered by HTML object or Component, and handled by a Closure Actio
 
 1. HTML object → Component Handler (Within a Component)
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
 <input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" />
 ```
-{% endraw %}
+
 
 ```javascript
 //app/components/campaign-table-select.js (Component’s Handler)
@@ -498,12 +498,11 @@ export default Ember.Component.extend({
 
 2. HTML object → Route Handler ([Why directly to the Route?](https://dockyard.com/blog/2016/02/19/best-practices-route-actions))
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-action-menu.hbs (HTML object)
 <li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
 ```
-{% endraw %}
 
 ```javascript
 //app/routes/campaigns/create.js (Route)
@@ -520,21 +519,21 @@ export default Ember.Route.extend({
 
 3. Component → Container Component
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 ```
-{% endraw %}
+
 
 or
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 ```
-{% endraw %}
+
 
 ```javascript
 //app/components/campaign-row.js (Component)
@@ -549,12 +548,12 @@ export default Ember.Route.extend({
 });
 ```
 
-{% raw %}
+
 ```hbs
 //app/templates/components/campaign-table-select.hbs (Container)
 {{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}
 ```
-{% endraw %}
+
 
 ```javascript
 //app/components/campaign-table-select.js (Container)
@@ -573,7 +572,7 @@ export default Ember.Component.extend({
 
 4. Component → Route Handler
 
-{% raw %}
+
 ```hbs
 //app/templates/components/creative-select.hbs (Component)
 <a href="#" {{action onremove this)}}>Remove Creative</a>
