@@ -226,6 +226,8 @@ function deleteInventories(inventories) {
 function findCampaign(campaign_id) {
   return store.findRecord('campaign', campaign_id);
 }
+```
+```html
 // in template.hbs
 {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
@@ -322,9 +324,8 @@ Changeset represents a set of valid changes to be applied onto any Object (Ember
 
 Given Ember's Data Down, Actions Up (DDAU) approach, a changeset is more appropriate compared to implicit 2 way bindings. ember-changeset only allows valid changes to be set, so your Objects will never become invalid (assuming you have 100% validation coverage). Additionally, this addon is designed to be un-opinionated about your choice of form and/or validation library, so you can easily integrate it into an existing solution.
 
-<table>
-  <tr>
-    <td>//app/routes/campaigns/create.js
+```javascript
+//app/routes/campaigns/create.js
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import CampaignValidations from 'frontend/validations/campaign';
@@ -337,16 +338,14 @@ import CampaignValidations from 'frontend/validations/campaign';
     this.addEpisodesByIds(model.allEpisodes);
   },
 
-...</td>
-  </tr>
-</table>
+...
+```
 
 
 The simplest way to incorporate validations is to use [ember-changeset-validations](https://github.com/DockYard/ember-changeset-validations/), a companion addon to this one. It has a simple mental model, and there are no Observers or CPs involved – just pure functions.
 
-<table>
-  <tr>
-    <td>//app/validations/campaign.js
+```javascript
+//app/validations/campaign.js
 import {
     validatePresence
 } from 'ember-changeset-validations/validators';
@@ -363,16 +362,14 @@ export default {
       validateDateLater({than: 'startDate', message: "Should later than start date."}),
       validateDateBeforeThan({ than: 'startDate', amount: 30, units: 'days' })
     ]
-};</td>
-  </tr>
-</table>
+};
+```
 
 
 You could define your custom validator too, like "validateDateBeforeThan".
 
-<table>
-  <tr>
-    <td>//app/validators/date-before-than.js
+```javascript
+//app/validators/date-before-than.js
 import Ember from 'ember';
 import _ from 'npm:lodash';
 import moment from 'npm:moment';
@@ -393,29 +390,25 @@ export default function validateDateBeforeThan({ than, amount = 0, units = 'h' }
     isValid = moment(newValue).isBefore(comparisonValue);
     return isValid === true || mesg;
   };
-}</td>
-  </tr>
-</table>
+}
+```
 
 
 Once you set value to a property of the changeset or changeset.validate(), the validation will be happened to the property or all properties, and you can check the status and show the error messages if there were.
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-date-select.hbs
+```javascript
+//app/templates/components/campaign-date-select.hbs
 ...
       {{#grid-col medium=3 class="campaign-datepicker" }}
         {{fa-icon "calendar"}} {{pikaday-input format="MM/DD/YYYY" placeholder="Start Date" class=(if campaignChangeset.error.startDate " is-invalid-input" "") value=campaignChangeset.startDate onSelection=(action (mut campaignChangeset.startDate)) disabled=(not-eq campaignChangeset.status 'Draft')}}
         {{validation-errors changeset=campaignChangeset property="startDate"}}
       {{/grid-col}}
-...</td>
-  </tr>
-</table>
+...
+```
 
 
-<table>
-  <tr>
-    <td>//app/templates/components/validation-errors.hbs
+```javascript
+//app/templates/components/validation-errors.hbs
 {{#liquid-if (get changeset.error property)}}
   <span class="is-visible form-error">
   	<ul>
@@ -424,9 +417,8 @@ Once you set value to a property of the changeset or changeset.validate(), the v
     	{{/each}}
     </ul>
   </span>
-{{/liquid-if}}</td>
-  </tr>
-</table>
+{{/liquid-if}}
+```
 
 
 Without using changeset, both two-way binding and DDAU will change the campaign name in  the campaign list and dialog.
@@ -445,11 +437,9 @@ Some people suggest that you’ll find your components much easier to reuse and 
 
 To define a component, run:
 
-<table>
-  <tr>
-    <td>ember generate component my-component-name</td>
-  </tr>
-</table>
+```javascript
+ember generate component my-component-name
+```
 
 
 Components must have at least one dash in their name. So campaign-edit is an acceptable name, and so is episode-table-select, but campaign is not. This prevents clashes with current or future HTML element names, aligns Ember components with the W3C [Custom Elements](https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/custom/index.html) spec, and ensures Ember detects the components automatically.
@@ -458,16 +448,14 @@ Components must have at least one dash in their name. So campaign-edit is an acc
 
 Often times, your components will just encapsulate certain snippets of Handlebars templates that you find yourself using over and over, and a subclass if you wanted to change a component's element, respond to actions from the component's template, or manually make changes to the component's element using JavaScript.
 
-<table>
-  <tr>
-    <td>import Ember from 'ember';
+```javascript
+import Ember from 'ember';
 const BlogPostComponent = Ember.Component.extend({});
 BlogPostComponent.reopenClass({
   positionalParams: ['title', 'body']
 });
-export default BlogPostComponent;</td>
-  </tr>
-</table>
+export default BlogPostComponent;
+```
 
 
 ### Dynamically rendering a Component
@@ -488,17 +476,14 @@ Events are triggered by HTML object or Component, and handled by a Closure Actio
 
 1. HTML object → Component Handler (Within a Component)
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
-<input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" /></td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
+<input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" />
+```
 
 
-<table>
-  <tr>
-    <td>//app/components/campaign-table-select.js (Component’s Handler)
+```javascript
+//app/components/campaign-table-select.js (Component’s Handler)
 import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
@@ -507,24 +492,20 @@ export default Ember.Component.extend({
       this.set('keyword', keyword);
     }
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 2. HTML object → Route Handler ([Why directly to the Route?](https://dockyard.com/blog/2016/02/19/best-practices-route-actions))
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-action-menu.hbs (HTML object)
-<li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li></td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/campaign-action-menu.hbs (HTML object)
+<li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
+```
 
 
-<table>
-  <tr>
-    <td>//app/routes/campaigns/create.js (Route)
+```javascript
+//app/routes/campaigns/create.js (Route)
 import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
@@ -533,26 +514,22 @@ export default Ember.Route.extend({
       this.transitionTo('campaigns.campaign', campaign.id);
     }
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 3. Component → Container Component
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-row.hbs (Component)
-<a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a></td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/campaign-row.hbs (Component)
+<a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
+```
 
 
 or
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-row.hbs (Component)
+```javascript
+//app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 
 //app/components/campaign-row.js (Component)
@@ -564,22 +541,18 @@ export default Ember.Route.extend({
       this.onDuplicate(campaign);
     },
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-table-select.hbs (Container)
-{{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}</td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/campaign-table-select.hbs (Container)
+{{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}
+```
 
 
-<table>
-  <tr>
-    <td>//app/components/campaign-table-select.js (Container)
+```javascript
+//app/components/campaign-table-select.js (Container)
 import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
@@ -590,26 +563,22 @@ export default Ember.Component.extend({
       });
     },
   }
-})</td>
-  </tr>
-</table>
+})
+```
 
 
 4. Component → Route Handler
 
-<table>
-  <tr>
-    <td>//app/templates/components/creative-select.hbs (Component)
-<a href="#" {{action onremove this)}}>Remove Creative</a></td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/creative-select.hbs (Component)
+<a href="#" {{action onremove this)}}>Remove Creative</a>
+```
 
 
 or
 
-<table>
-  <tr>
-    <td>//app/templates/components/creative-select.hbs (Component)
+```javascript
+//app/templates/components/creative-select.hbs (Component)
 <a href="#" {{action 'removeCreative' this}}>Remove Creative by Handler</a>
 
 //app/components/creative-select.js (Component)
@@ -620,22 +589,18 @@ export default Ember.Component.extend({
       this.onremove(creative);
     },
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
-<table>
-  <tr>
-    <td>//app/templates/components/campaign-edit.hbs (Container)
-{{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}</td>
-  </tr>
-</table>
+```javascript
+//app/templates/components/campaign-edit.hbs (Container)
+{{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}
+```
 
 
-<table>
-  <tr>
-    <td>//app/routes/application.js (Route)
+```javascript
+//app/routes/application.js (Route)
 import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
@@ -644,28 +609,24 @@ export default Ember.Route.extend({
       c.save();
     },
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 ### Handling Action Completion
 
 Often [Closure Actions](http://emberjs.com/blog/2015/06/12/ember-1-13-0-released.html#toc_closure-actions) perform asynchronous tasks, such as making an ajax request to a server. You return a [Promise](http://emberjs.com/api/classes/RSVP.Promise.html) from these actions to handle completion.
 
-<table>
-  <tr>
-    <td>//app/templates/components/episode-table-select.hbs (Component)
+```javascript
+//app/templates/components/episode-table-select.hbs (Component)
 <a href="#" class="button primary expanded hollow" {{action "viewmore"}}>
   {{#if isLoading}}{{loading-spinner}}{{/if}} View More
-</a></td>
-  </tr>
-</table>
+</a>
+```
 
 
-<table>
-  <tr>
-    <td>//app/components/episode-table-select.js (Component)
+```javascript
+//app/components/episode-table-select.js (Component)
 import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
@@ -677,27 +638,23 @@ export default Ember.Component.extend({
     },
   }
 });
-</td>
-  </tr>
-</table>
+
+```
 
 
-<table>
-  <tr>
-    <td>//app/templates/campaigns/list.hbs (Container Component)
+```javascript
+//app/templates/campaigns/list.hbs (Container Component)
 {{episode-table-select model=model.episodes onviewmore=(action "getMoreEpisodes") }} 
 
 Or
 
 //app/templates/campaigns/list.hbs (Route)
-{{episode-table-select model=model.episodes onviewmore=(action (route-action "getMoreEpisodes")) }} </td>
-  </tr>
-</table>
+{{episode-table-select model=model.episodes onviewmore=(action (route-action "getMoreEpisodes")) }} 
+```
 
 
-<table>
-  <tr>
-    <td>//app/routes/campaigns/list.js (Component or Route)
+```javascript
+//app/routes/campaigns/list.js (Component or Route)
 import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
@@ -709,9 +666,8 @@ export default Ember.Route.extend({
       return store.query('episode', params);
     },
   }
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 ## Application Concerns
@@ -720,9 +676,8 @@ export default Ember.Route.extend({
 
 Ember applications utilize the [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) ("DI") design pattern to declare and instantiate classes of objects and dependencies between them. You can inject a router, services or Components into any class that requires instantiation.
 
-<table>
-  <tr>
-    <td>//app/initializers/component-router-injector.js
+```javascript
+//app/initializers/component-router-injector.js
 export function initialize(application) {
   // Injects all Ember components with a router object:
   application.inject('component', 'router', 'router:main');
@@ -731,14 +686,12 @@ export function initialize(application) {
 export default {
   name: 'component-router-injector',
   initialize: initialize
-};</td>
-  </tr>
-</table>
+};
+```
 
 
-<table>
-  <tr>
-    <td>//app/routes/settings.js
+```javascript
+//app/routes/settings.js
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
@@ -746,9 +699,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // services Ad Hoc injection:
   stripe: Ember.inject.service('stripe'),
   notifications: Ember.inject.service('notification-messages'),
-...</td>
-  </tr>
-</table>
+...
+```
 
 
 One of the major advantages of dependency injection is that it can make testing(especially unit test) lots easier. 
@@ -759,16 +711,13 @@ An Ember.Service is an Ember object that lives for the duration of the applicati
 
 Services are useful for features that require shared state or persistent connections. Example uses of services might include: User/session authentication; Geolocation; WebSockets; Server-sent events or notifications; Server-backed API calls that may not fit Ember Data; Third-party APIs; Logging. To create a service, run:
 
-<table>
-  <tr>
-    <td>ember generate service stripe</td>
-  </tr>
-</table>
+```javascript
+ember generate service stripe
+```
 
 
-<table>
-  <tr>
-    <td>//app/services/stripe.js
+```javascript
+//app/services/stripe.js
 import Ember from 'ember';
 import config from 'apptalks-adportal-frontend/config/environment';
 
@@ -785,9 +734,8 @@ export default Ember.Service.extend({
       this._request(`${config.api.host}/payment`, 'post', data).then(resolve).catch(reject);
     });
   },
-...</td>
-  </tr>
-</table>
+...
+```
 
 
 ## Testing
@@ -796,18 +744,15 @@ export default Ember.Service.extend({
 
 Let’s say we want to do 2 acceptance tests: register a user, list a user’s campaigns. Run "ember generate acceptance-test <name>" to to create an acceptance test,
 
-<table>
-  <tr>
-    <td>ember generate acceptance-test register</td>
-  </tr>
-</table>
+```javascript
+ember generate acceptance-test register
+```
 
 
 and then write some test code within.
 
-<table>
-  <tr>
-    <td>//tests/acceptance/register-test.js
+```javascript
+//tests/acceptance/register-test.js
 import { test } from 'qunit';
 import moduleForAcceptance from 'frontend/tests/helpers/module-for-acceptance';
 moduleForAcceptance('Acceptance | register');
@@ -827,23 +772,19 @@ test('visiting /register', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/register');
   });
-});</td>
-  </tr>
-</table>
+});
+```
 
 
 Similar to campaigns acceptance test,
 
-<table>
-  <tr>
-    <td>ember generate acceptance-test campaigns</td>
-  </tr>
-</table>
+```javascript
+ember generate acceptance-test campaigns
+```
 
 
-<table>
-  <tr>
-    <td>//tests/acceptance/campaigns-test.js
+```javascript
+//tests/acceptance/campaigns-test.js
 import { test } from 'qunit';
 import moduleForAcceptance from 'frontend/tests/helpers/module-for-acceptance';
 import startApp from '../helpers/start-app';
@@ -859,16 +800,14 @@ test('visiting /campaigns', function(assert) {
     assert.equal(currentURL(), '/campaigns');
   });
 });
-</td>
-  </tr>
-</table>
+
+```
 
 
 In order to show user’s campaigns, we need a helper to authenticate the session, which is done by login somehow.
 
-<table>
-  <tr>
-    <td>//tests/helpers/authenticate.js
+```javascript
+//tests/helpers/authenticate.js
 import startApp from '../helpers/start-app';
 import config from '../../config/environment';
 
@@ -879,18 +818,15 @@ export function authenticateSession() {
 
   session.authenticate("authenticator:oauth2", 'tao@swarmnyc.com', 'tao');
   return wait();
-};</td>
-  </tr>
-</table>
+};
+```
 
 
 Start the test server: ember test --server
 
-<table>
-  <tr>
-    <td>ember test --server</td>
-  </tr>
-</table>
+```javascript
+ember test --server
+```
 
 
 Run the test in a browser: [http://localhost:7357/](http://localhost:7357/)
@@ -954,14 +890,12 @@ At this point, if you’re using history as your locationType, you may run into 
 
 If you choose to switch from history to hash, change the configuration in your config/environment.js file and then deploy again.
 
-<table>
-  <tr>
-    <td>var ENV = {
+```javascript
+var ENV = {
   // ...
   locationType: 'hash', // 'auto',
-}</td>
-  </tr>
-</table>
+}
+```
 
 
 ## Fast Hands
@@ -1010,9 +944,8 @@ This is an ember-cli addon for easily loading CommonJS modules from npm via brow
 
 You can easily use the npm modules: e.g. lodash, moment, etc.
 
-<table>
-  <tr>
-    <td>//app/validators/date-before-than.js
+```javascript
+//app/validators/date-before-than.js
 import Ember from 'ember';
 import _ from 'npm:lodash';
 import moment from 'npm:moment';
@@ -1031,9 +964,8 @@ export default function validateDateBeforeThan({ than, amount = 0, units = 'h' }
     isValid = moment(newValue).isBefore(comparisonValue);
     return isValid === true || mesg;
   };
-}</td>
-  </tr>
-</table>
+}
+```
 
 
 Read more: [How to use third party npm packages with ember cli app](http://stackoverflow.com/questions/26544578/how-to-use-third-party-npm-packages-with-ember-cli-app)
