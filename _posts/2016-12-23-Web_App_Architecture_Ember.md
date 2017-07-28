@@ -495,7 +495,6 @@ export default Ember.Component.extend({
 });
 ```
 
-
 2. HTML object → Route Handler ([Why directly to the Route?](https://dockyard.com/blog/2016/02/19/best-practices-route-actions))
 
 {% raw %}
@@ -504,7 +503,6 @@ export default Ember.Component.extend({
 <li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
 ```
 {% endraw %}
-
 
 ```javascript
 //app/routes/campaigns/create.js (Route)
@@ -519,7 +517,6 @@ export default Ember.Route.extend({
 });
 ```
 
-
 3. Component → Container Component
 
 {% raw %}
@@ -528,7 +525,6 @@ export default Ember.Route.extend({
 <a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 ```
 {% endraw %}
-
 
 or
 
@@ -559,7 +555,6 @@ export default Ember.Route.extend({
 ```
 {% endraw %}
 
-
 ```javascript
 //app/components/campaign-table-select.js (Container)
 import Ember from 'ember';
@@ -575,7 +570,6 @@ export default Ember.Component.extend({
 })
 ```
 
-
 4. Component → Route Handler
 
 {% raw %}
@@ -584,7 +578,6 @@ export default Ember.Component.extend({
 <a href="#" {{action onremove this)}}>Remove Creative</a>
 ```
 {% endraw %}
-
 
 or
 
