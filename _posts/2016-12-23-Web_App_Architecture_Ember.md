@@ -498,10 +498,12 @@ export default Ember.Component.extend({
 
 2. HTML object → Route Handler ([Why directly to the Route?](https://dockyard.com/blog/2016/02/19/best-practices-route-actions))
 
-```javascript
+{% raw %}
+```hbs
 //app/templates/components/campaign-action-menu.hbs (HTML object)
 <li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
 ```
+{% endraw %}
 
 
 ```javascript
@@ -525,10 +527,12 @@ export default Ember.Route.extend({
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
 ```
+{% endraw %}
 
 
 or
 
+{% raw %}
 ```hbs
 //app/templates/components/campaign-row.hbs (Component)
 <a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
