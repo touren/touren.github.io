@@ -390,8 +390,8 @@ export default function validateDateBeforeThan({ than, amount = 0, units = 'h' }
 
 Once you set value to a property of the changeset or changeset.validate(), the validation will be happened to the property or all properties, and you can check the status and show the error messages if there were.
 
-```hbs
 {% raw %}
+```hbs
 //app/templates/components/campaign-date-select.hbs
 ...
       {{#grid-col medium=3 class="campaign-datepicker" }}
@@ -399,12 +399,12 @@ Once you set value to a property of the changeset or changeset.validate(), the v
         {{validation-errors changeset=campaignChangeset property="startDate"}}
       {{/grid-col}}
 ...
-{% endraw %}
 ```
+{% endraw %}
 
 
-```hbs
 {% raw %}
+```hbs
 //app/templates/components/validation-errors.hbs
 {{#liquid-if (get changeset.error property)}}
   <span class="is-visible form-error">
@@ -415,8 +415,8 @@ Once you set value to a property of the changeset or changeset.validate(), the v
     </ul>
   </span>
 {{/liquid-if}}
-{% endraw %}
 ```
+{% endraw %}
 
 
 Without using changeset, both two-way binding and DDAU will change the campaign name in  the campaign list and dialog.
@@ -435,7 +435,7 @@ Some people suggest that you’ll find your components much easier to reuse and 
 
 To define a component, run:
 
-```javascript
+```
 ember generate component my-component-name
 ```
 
@@ -474,11 +474,12 @@ Events are triggered by HTML object or Component, and handled by a Closure Actio
 
 1. HTML object → Component Handler (Within a Component)
 
-```javascript
+{% raw %}
+```hbs
 //app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
 <input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" />
 ```
-
+{% endraw %}
 
 ```javascript
 //app/components/campaign-table-select.js (Component’s Handler)
