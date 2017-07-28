@@ -874,17 +874,11 @@ ember deploy --activate=true production
 ember deploy:list production
 
    timestamp           | revision                       
-
  =================================                      	
-
    2016/11/18 17:11:04 | 3ce9112a62d4eaefbc9f0d55cf82d3d0 
-
    2016/11/18 11:14:44 | b8b43c20be73530e561e3608b6c9d63c 
-
    2016/11/17 10:10:41 | a6c4d9d94f7b36ab9874ff821e59e912 
-
    2016/11/14 21:47:17 | 5f4394c83b11201ed70836d308606323 
-
  > 2016/11/14 21:05:04 | f8216619c2d2897d83e8a614c4d3c8f5 
 ```
 # Active a reversion
@@ -913,7 +907,7 @@ Plugins:
 
 * **Fuzzy Finder**
 
-* **a****[tom-beautif**y](https://github.com/Glavin001/atom-beautify)
+* **[atom-beautify]**(https://github.com/Glavin001/atom-beautify)
 
 * **platformio-ide-terminal**
 
@@ -983,12 +977,14 @@ An wrapper to [Foundation for Sites](http://foundation.zurb.com/sites/docs/).
 
 ## More Readings
 
-### [Data down, actions up](http://www.samselikoff.com/blog/data-down-actions-up/)
+[Data down, actions up](http://www.samselikoff.com/blog/data-down-actions-up/)
 
-## ![image alt text](image_8.png)
+![image alt text](image_8.png)
 
-### [actions-up-data-sideways](http://forspareparts.github.io/2016/01/24/actions-up-data-sideways/)
+[actions-up-data-sideways](http://forspareparts.github.io/2016/01/24/actions-up-data-sideways/)
 
-### [Ember Best Practices](https://dockyard.com/blog/categories/best-practices)
+[Ember Best Practices](https://dockyard.com/blog/categories/best-practices)
 
+
+--- end ---
 {% endraw %}
