@@ -578,7 +578,6 @@ export default Ember.Component.extend({
 //app/templates/components/creative-select.hbs (Component)
 <a href="#" {{action onremove this)}}>Remove Creative</a>
 ```
-{% endraw %}
 
 or
 
@@ -992,3 +991,4 @@ An wrapper to [Foundation for Sites](http://foundation.zurb.com/sites/docs/).
 
 ### [Ember Best Practices](https://dockyard.com/blog/categories/best-practices)
 
+{% endraw %}
