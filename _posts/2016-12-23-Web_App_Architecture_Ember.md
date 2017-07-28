@@ -12,23 +12,37 @@ tags:
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
 // in template.hbs
-{{#each campaign.inventories as |inventory|}}
+ {% raw %}
+ {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
 {{/each}}</td>
-
+{% endraw %}
 
 ```javascript
+{% raw %}
 // in template.hbs
 {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
 {{/each}}</td>
+{% endraw %}
 ```
 
-```
+```html
+{% raw %}
 // in template.hbs
 {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
 {{/each}}</td>
+{% endraw %}
+```
+
+```hbs
+{% raw %}
+// in template.hbs
+{{#each campaign.inventories as |inventory|}}
+  <strong>{{inventory.title}},{{inventory.price}}</strong>
+{{/each}}</td>
+{% endraw %}
 ```
 
 ## Why Ember?
