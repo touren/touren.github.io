@@ -51,11 +51,12 @@ Templates can also display properties provided to them from their context, which
 ```hbs
  <div>Hi {{name}}, this is a valid Ember template!</div></td>
 ```
-
-Here, `{{name}}` is a property provided by the template's context.
-
-Besides properties, double curly braces `{{}}` may also contain helpers and components, which we'll discuss later.
 {% endraw %}
+
+Here, {% raw %}`{{name}}`{% endraw %} is a property provided by the template's context.
+
+Besides properties, double curly braces {% raw %}`{{}}`{% endraw %} may also contain helpers and components, which we'll discuss later.
+
 **_We can think of Template as View in MVVM_**
 
 ### Components
