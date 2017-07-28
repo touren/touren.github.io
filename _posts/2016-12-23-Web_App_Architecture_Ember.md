@@ -227,7 +227,7 @@ function findCampaign(campaign_id) {
   return store.findRecord('campaign', campaign_id);
 }
 ```
-```html
+```hbs
 // in template.hbs
 {{#each campaign.inventories as |inventory|}}
   <strong>{{inventory.title}},{{inventory.price}}</strong>
