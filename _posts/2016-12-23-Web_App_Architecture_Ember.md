@@ -14,7 +14,7 @@ One of the things I really appreciate about a good architecture is when you have
 
 ## Why Ember?
 
-* Support MVVM, two-way Data-binding (NOTE:  Ember 2.0 is embracing Data Down, Actions Up (DDAU) approach instead.):
+* Support MVVM, two-way Data-binding (NOTE:  Ember 2.0 is embracing [Data Down, Actions Up (DDAU)](https://balinterdi.com/blog/the-tale-of-two-bindings) approach instead.):
 
     * Write dramatically less code with Ember's Handlebars integrated templates that update automatically when the underlying data changes.
 
@@ -24,7 +24,7 @@ One of the things I really appreciate about a good architecture is when you have
 
 * Fast development for MVP:
 
-    * Ember.js is built for productivity. Designed with developer ergonomics in mind, its friendly APIs help you get your job done—fast.
+    * Ember.js is built for productivity. Designed with developer ergonomics in mind, its friendly APIs help you get your job done fast.
 
 ## Core Concepts of Ember:
 
@@ -150,85 +150,84 @@ Here are some scenarios you will manipulate the relationship.
 
 * Create new campaign and a few new inventories;
 
-```javascript
-function createCampaignWithInventories(inventories) {
-  let campaign = store.createRecord('campaign');
-  let inventory = store.createRecord('inventory');
-  inventories.addObject(inventory);
-  this.set('showWaitingSpinner', true);
-  campaign.save().then( (savedCampaign) => {
-    inventories.setEach('campaign', savedCampaign);
-    Ember.RSVP.all(inventories.invoke('save')).then( () => { 
-      this.set('showWaitingSpinner', false);
-    });
-  }).catch( (err) => {
-    this.set('showWaitingSpinner', false);
-    this.set('errorMessage', err);
-  });
-}
-```
+    ```javascript
+    function createCampaignWithInventories(inventories) {
+      let campaign = store.createRecord('campaign');
+      let inventory = store.createRecord('inventory');
+      inventories.addObject(inventory);
+      this.set('showWaitingSpinner', true);
+      campaign.save().then( (savedCampaign) => {
+        inventories.setEach('campaign', savedCampaign);
+        Ember.RSVP.all(inventories.invoke('save')).then( () => { 
+          this.set('showWaitingSpinner', false);
+        });
+      }).catch( (err) => {
+        this.set('showWaitingSpinner', false);
+        this.set('errorMessage', err);
+      });
+    }
+    ```
 
 * Update campaign’s attributes;
 
-```javascript
-function updateCampaign(campaign) {
-  this.set('showWaitingSpinner', true);
-  campaign.set('name', 'Amazing Campaign');
-  campaign.save().then( () => {
-    this.set('showWaitingSpinner', false);
-  });
-}
-```
-
+    ```javascript
+    function updateCampaign(campaign) {
+      this.set('showWaitingSpinner', true);
+      campaign.set('name', 'Amazing Campaign');
+      campaign.save().then( () => {
+        this.set('showWaitingSpinner', false);
+      });
+    }
+    ```
 
 * Update attributes within some inventories:
 
-```javascript
-function updateInventories(inventories) {
-  this.set('showWaitingSpinner', true);
-  inventories.forEach( (inventory) => {
-    inentory.set('price', 0.12);
-  });
-  Ember.RSVP.all(inventories.invoke('save')).then( () => { 
-    this.set('showWaitingSpinner', false);
-  });
-}
-```
+    ```javascript
+    function updateInventories(inventories) {
+      this.set('showWaitingSpinner', true);
+      inventories.forEach( (inventory) => {
+        inentory.set('price', 0.12);
+      });
+      Ember.RSVP.all(inventories.invoke('save')).then( () => { 
+        this.set('showWaitingSpinner', false);
+      });
+    }
+    ```
 
 * Insert a few new inventories to an existing campaign:
 
-```javascript
-function addInventories(campaign, inventories) {
-  this.set('showWaitingSpinner', true);
-  let inventory = store.createRecord('inventory');
-  inventories.addObject(inventory);
-  inventories.forEach( (inventory) => {
-    inventory.set('campaign', campaign);
-  });
-  Ember.RSVP.all(inventories.invoke('save')).then( () => { 
-    this.set('showWaitingSpinner', false);
-  });
-}
-```
+    ```javascript
+    function addInventories(campaign, inventories) {
+      this.set('showWaitingSpinner', true);
+      let inventory = store.createRecord('inventory');
+      inventories.addObject(inventory);
+      inventories.forEach( (inventory) => {
+        inventory.set('campaign', campaign);
+      });
+      Ember.RSVP.all(inventories.invoke('save')).then( () => { 
+        this.set('showWaitingSpinner', false);
+      });
+    }
+    ```
 
 * Delete a few inventories from an existing campaign:
 
-```javascript
-function deleteInventories(inventories) {
-  this.set('showWaitingSpinner', true);
-  Ember.RSVP.all(inventories.invoke('destroyRecord')).then( () => { 
-    this.set('showWaitingSpinner', false);
-  });
-}
-```
+    ```javascript
+    function deleteInventories(inventories) {
+      this.set('showWaitingSpinner', true);
+      Ember.RSVP.all(inventories.invoke('destroyRecord')).then( () => { 
+        this.set('showWaitingSpinner', false);
+      });
+    }
+    ```
 
 * Load a campaign and its inventories:
 
-```javascript
-function findCampaign(campaign_id) {
-  return store.findRecord('campaign', campaign_id);
-}
-```
+    ```javascript
+    function findCampaign(campaign_id) {
+      return store.findRecord('campaign', campaign_id);
+    }
+    ```
 
 Inventories within the campaign will automatically be loaded when template try to show them. ([more detail](http://stackoverflow.com/questions/30219519/ember-js-loading-related-models-directly?answertab=votes#tab-top)), though one request to server per inventory. For efficiency, you can use Ember sideload to include all data in one-to-many relationship by one request. ([JSON-API correct handling of included entities #3380](https://github.com/emberjs/data/issues/3380))
 
@@ -460,9 +459,9 @@ export default BlogPostComponent;
 
 ### Dynamically rendering a Component
 
-The [{{component}}](http://emberjs.com/api/classes/Ember.Templates.helpers.html#method_component) helper can be used to defer the selection of a component to run time. The {{my-component}} syntax always renders the same component, while using the {{component}} helper allows choosing a component to render on the fly. This is useful in cases where you want to interact with different external libraries depending on the data. Using the {{component}} helper would allow you to keep different logic well separated.
+The [{{component}}](http://emberjs.com/api/classes/Ember.Templates.helpers.html#method_component) helper can be used to defer the selection of a component to run time. The `{{my-component}}` syntax always renders the same component, while using the `{{component}}` helper allows choosing a component to render on the fly. This is useful in cases where you want to interact with different external libraries depending on the data. Using the `{{component}}` helper would allow you to keep different logic well separated.
 
-The first parameter of the helper is the name of a component to render, as a string. So {{component 'campaign-list'}} is the same as using {{campaign-list}}.
+The first parameter of the helper is the name of a component to render, as a string. So `{{component 'campaign-list'}}` is the same as using `{{campaign-list}}`.
 
 The real value of [{{component}}](http://emberjs.com/api/classes/Ember.Templates.helpers.html#method_component) comes from being able to dynamically pick the component being rendered. Below is an example of using the helper as a means of choosing different components for displaying different kinds of posts:
 
@@ -476,146 +475,133 @@ Events are triggered by HTML object or Component, and handled by a Closure Actio
 
 1. HTML object → Component Handler (Within a Component)
 
+    ```hbs
+    //app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
+    <input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" />
+    ```
 
-```hbs
-//app/templates/components/campaign-table-select.hbs (HTML object in a Component’s template)
-<input type="text" onkeyup={{action "queryCampaign"}} class="search-icon-text" placeholder="&#xF002; Search Campaigns" />
-```
 
-
-```javascript
-//app/components/campaign-table-select.js (Component’s Handler)
-import Ember from 'ember';
-export default Ember.Component.extend({
-  actions: {
-    queryCampaign(event) {
-      const keyword = event.target.value;
-      this.set('keyword', keyword);
-    }
-  }
-});
-```
+    ```javascript
+    //app/components/campaign-table-select.js (Component’s Handler)
+    import Ember from 'ember';
+    export default Ember.Component.extend({
+      actions: {
+        queryCampaign(event) {
+          const keyword = event.target.value;
+          this.set('keyword', keyword);
+        }
+      }
+    });
+    ```
 
 2. HTML object → Route Handler ([Why directly to the Route?](https://dockyard.com/blog/2016/02/19/best-practices-route-actions))
 
+    ```hbs
+    //app/templates/components/campaign-action-menu.hbs (HTML object)
+    <li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
+    ```
 
-```hbs
-//app/templates/components/campaign-action-menu.hbs (HTML object)
-<li><a href="#" {{action (route-action 'editCampaign' row.content)}}>Edit</a></li>
-```
-
-```javascript
-//app/routes/campaigns/create.js (Route)
-import Ember from 'ember';
-export default Ember.Route.extend({
-  actions: {
-    editCampaign(campaign) {
-      const keyword = event.target.value;
-      this.transitionTo('campaigns.campaign', campaign.id);
-    }
-  }
-});
-```
+    ```javascript
+    //app/routes/campaigns/create.js (Route)
+    import Ember from 'ember';
+    export default Ember.Route.extend({
+      actions: {
+        editCampaign(campaign) {
+          const keyword = event.target.value;
+          this.transitionTo('campaigns.campaign', campaign.id);
+        }
+      }
+    });
+    ```
 
 3. Component → Container Component
 
 
-```hbs
-//app/templates/components/campaign-row.hbs (Component)
-<a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
-```
+    ```hbs
+    //app/templates/components/campaign-row.hbs (Component)
+    <a href="#" {{action onDuplicate campaign}}>{{fa-icon "files-o" title="Duplicate"}}</a>
+    ```
+    or
+    ```hbs
+    //app/templates/components/campaign-row.hbs (Component)
+    <a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
+    ```
 
+    ```javascript
+    //app/components/campaign-row.js (Component)
+    import Ember from 'ember';
+    export default Ember.Route.extend({
+      actions: {
+        duplicateMe() {
+          const campaign=this.get('campaign');
+          this.onDuplicate(campaign);
+        },
+      }
+    });
+    ```
 
-or
+    ```hbs
+    //app/templates/components/campaign-table-select.hbs (Container)
+    {{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}
+    ```
 
-
-```hbs
-//app/templates/components/campaign-row.hbs (Component)
-<a href="#" {{action 'duplicateMe'}}>{{fa-icon "files-o" title="Duplicate"}}</a>
-```
-
-
-```javascript
-//app/components/campaign-row.js (Component)
-import Ember from 'ember';
-export default Ember.Route.extend({
-  actions: {
-    duplicateMe() {
-      const campaign=this.get('campaign');
-      this.onDuplicate(campaign);
-    },
-  }
-});
-```
-
-
-```hbs
-//app/templates/components/campaign-table-select.hbs (Container)
-{{campaign-row campaign=campaign campaignEpisodes=campaignEpisodes episodes=episodes onCheck="checkCampaign" onDuplicate=(action "duplicateCampaign")}}
-```
-
-
-```javascript
-//app/components/campaign-table-select.js (Container)
-import Ember from 'ember';
-export default Ember.Component.extend({
-  actions: {
-    duplicateCampaign(campaign) {
-      campaign.copy().then(function(_copy) {
-        _copy.set('showDialog', true);
-        this.set('toBeCopiedCampaign', _copy);
-      });
-    },
-  }
-})
-```
+    ```javascript
+    //app/components/campaign-table-select.js (Container)
+    import Ember from 'ember';
+    export default Ember.Component.extend({
+      actions: {
+        duplicateCampaign(campaign) {
+          campaign.copy().then(function(_copy) {
+            _copy.set('showDialog', true);
+            this.set('toBeCopiedCampaign', _copy);
+          });
+        },
+      }
+    })
+    ```
 
 4. Component → Route Handler
 
 
-```hbs
-//app/templates/components/creative-select.hbs (Component)
-<a href="#" {{action onremove this)}}>Remove Creative</a>
-```
+    ```hbs
+    //app/templates/components/creative-select.hbs (Component)
+    <a href="#" {{action onremove this)}}>Remove Creative</a>
+    ```
+    or
+    ```hbs
+    //app/templates/components/creative-select.hbs (Component)
+    <a href="#" {{action 'removeCreative' this}}>Remove Creative by Handler</a>
+    ```
 
-or
+    ```javascript
+    //app/components/creative-select.js (Component)
+    import Ember from 'ember';
+    export default Ember.Component.extend({
+      actions: {
+        removeCreative(creative) {
+          this.onremove(creative);
+        },
+      }
+    });
+    ```
 
-```hbs
-//app/templates/components/creative-select.hbs (Component)
-<a href="#" {{action 'removeCreative' this}}>Remove Creative by Handler</a>
-```
+    ```hbs
+    //app/templates/components/campaign-edit.hbs (Container)
+    {{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}
+    ```
 
-```javascript
-//app/components/creative-select.js (Component)
-import Ember from 'ember';
-export default Ember.Component.extend({
-  actions: {
-    removeCreative(creative) {
-      this.onremove(creative);
-    },
-  }
-});
-```
-
-
-```hbs
-//app/templates/components/campaign-edit.hbs (Container)
-{{creative-select selectedCreatives=model.selectedCreatives onaddmedia="addMedia" onaddcreative="addCreative" onremove=(route-action "removeCreative") creatives=model.creatives media=model.media }}
-```
-
-```javascript
-//app/routes/application.js (Route)
-import Ember from 'ember';
-export default Ember.Route.extend({
-  actions: {
-    removeCreative(c) {
-      c.deleteRecord();
-      c.save();
-    },
-  }
-});
-```
-
+    ```javascript
+    //app/routes/application.js (Route)
+    import Ember from 'ember';
+    export default Ember.Route.extend({
+      actions: {
+        removeCreative(c) {
+          c.deleteRecord();
+          c.save();
+        },
+      }
+    });
+    ```
 
 ### Handling Action Completion
 
