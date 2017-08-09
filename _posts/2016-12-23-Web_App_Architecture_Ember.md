@@ -8,7 +8,6 @@ tags:
     - Data Binding
     - MVVM
 ---
-
 {% raw %}
 One of the things I really appreciate about a good architecture is when you have a defect in your app and you know exactly where to go to fix it.
 
