@@ -69,9 +69,13 @@ Below is the [demo gif][Demo]:
 
 ## Reference
 * [How to import JSON data into Google Spreadsheets in less than 5 minutes]
+* [4 Ways to Automagically Get Your Data Into Spreadsheets]
+
+
 
 
 [How to import JSON data into Google Spreadsheets in less than 5 minutes]: https://medium.com/@paulgambill/how-to-import-json-data-into-google-spreadsheets-in-less-than-5-minutes-a3fede1a014a
+[4 Ways to Automagically Get Your Data Into Spreadsheets]: https://www.geckoboard.com/blog/4-ways-to-automagically-get-your-data-into-spreadsheets
 [ImportHeaderRowsJSON Raw]: https://raw.githubusercontent.com/touren/YouTube_API/master/importJSON.gs
 [ImportHeaderRowsJSON]: https://github.com/touren/YouTube_API/blob/master/importJSON.gs#L99
 [ImportJSON]: https://gist.github.com/chrislkeller/5719258
