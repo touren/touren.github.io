@@ -11,11 +11,11 @@ tags:
 
 ## INGREDIENTS
 
-* 2 tablespoons extra-virgin olive oil
-* 2 teaspoons garlic salt
-* 2 teaspoons black pepper
-* 2 teaspoons thyme
-* 2 teaspoons italian seasoning
+* 2 tablespoons of extra-virgin olive oil
+* 2 teaspoons of garlic salt
+* 2 teaspoons of black pepper
+* 2 teaspoons of thyme
+* 2 teaspoons of italian seasoning
 ![image alt text](/assets/images/bake_lamb_rack/ingredients.jpg)
 * 1 costco lamb rack
 ![image alt text](/assets/images/bake_lamb_rack/costco-rack-of-lamb.jpg)
@@ -28,7 +28,7 @@ tags:
 
 * Pour olive oil on the lamb rack, massage it.
 
-* Season black pepper, italian seasoning, thyme, garlic salt on the lamb rack.
+* Season both sides of the lamb rack with black pepper, italian seasoning, thyme, garlic salt.
 ![image alt text](/assets/images/bake_lamb_rack/after-seasoning.jpg)
 
 * Bake 1 hour and done.
