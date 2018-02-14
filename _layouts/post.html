@@ -11,7 +11,7 @@ layout: default
       </time>
       <div class="post-tags">
         {% for tag in page.tags %}
-            <a class="post-tag" itemprop="keywords" href="{{ '/tags' | relative_url }}#{{ tag | slugify}}">{{ tag }}</a>
+            <a class="post-tag" itemprop="keywords" href="#{{ tag | slugify}}">{{ tag }}</a>
         {% endfor %}
       </div>
 
