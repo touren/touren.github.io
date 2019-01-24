@@ -297,6 +297,8 @@ The EC2 instance where we need to add an inbound rule letting a Load Balancer re
 
 	* SSL Certificate: check Custom SSL Certificate, and pick the certificate to your app.
 
+	* Default Root Object: index.html or any html file you want to load "/"
+
 	* Others: keep them as are.
 
 	![image alt text](image_50.png)
@@ -313,5 +315,5 @@ The EC2 instance where we need to add an inbound rule letting a Load Balancer re
 
 	![image alt text](image_53.png)
 
-
+10. If you got 403 error when you open the link of the CloudFront, check [here](https://aws.amazon.com/premiumsupport/knowledge-center/s3-website-cloudfront-error-403/)
 
