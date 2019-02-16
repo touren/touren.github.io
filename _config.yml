@@ -1,3 +1,5 @@
+host: 0.0.0.0
+port: 4000
 
 name: Tao Ren
 title: Tao Ren's Blog
@@ -23,7 +25,7 @@ disqus:
 google-analytics: 'UA-102950168-1'
 google-cse: '000110185879055609612:xdyjng5hwge'
 
-gems:
+plugins:
   - jekyll-feed
   - jekyll-paginate
   # - jekyll-sitemap
