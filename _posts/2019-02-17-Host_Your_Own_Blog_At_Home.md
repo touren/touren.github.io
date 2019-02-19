@@ -101,7 +101,7 @@ sudo apt install nginx
 
 Make a new server block at /etc/nginx/sites-available/tao.ren:
 ```shell
-sudo sudo nano /etc/nginx/sites-available/tao.ren
+sudo nano /etc/nginx/sites-available/tao.ren
 ```
 
 Enable the file by creating a link from it to the sites-enabled directory:
@@ -135,7 +135,7 @@ server {
 Download and install the Let’s Encrypt Client
 ```shell
 add-apt-repository ppa:certbot/certbot
-apt-get install python-certbot-nginx
+sudo apt-get install python-certbot-nginx
 ```
 
 Obtain the SSL/TLS Certificate
