@@ -300,7 +300,7 @@ For method `DispatchQueue.concurrentPerform`:
 1. Always run it in a Global queue.
 1. It is similar to `for` loop, iterates concurrently though.
 1. Use it if you have some CPU intensive tasks need to be executed concurrently.
-1. If you have a bunch of network tasks, there is no benefit for using it, which basically nobody knows, execpt you I hope. 😊😊😊
+1. If you have a bunch of network tasks, there is no benefit for using it, which basically nobody knows, except you I hope. 😊😊😊
 
 
 🎉🎉🎉 🙌 🙌 🙌 
