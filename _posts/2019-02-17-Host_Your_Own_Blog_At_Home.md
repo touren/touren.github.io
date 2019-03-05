@@ -70,6 +70,8 @@ For dynu, you could do
 ```shell
 sudo apt-get update
 sudo apt-get install ruby ruby-dev make build-essential
+## make sure ruby version >= 2.3.0
+ruby -v 
 gem install bundler
 ```
 
