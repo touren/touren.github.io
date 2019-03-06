@@ -69,7 +69,7 @@ For dynu, you could do
 [Set Up a Jekyll Development Site][setup jekyll]
 ```shell
 sudo apt-get update
-sudo apt-get install ruby ruby-dev make build-essential
+sudo apt-get install ruby ruby-dev make git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
 ## make sure ruby version >= 2.3.0
 ruby -v 
 gem install bundler
@@ -106,12 +106,6 @@ Make a new server block at /etc/nginx/sites-available/tao.ren:
 sudo nano /etc/nginx/sites-available/tao.ren
 ```
 
-Enable the file by creating a link from it to the sites-enabled directory:
-
-```shell
-sudo ln -s /etc/nginx/sites-available/tao.ren /etc/nginx/sites-enabled/
-```
-
 Link the server blog to your blog, paste in the following configuration block, updated for our new directory and domain name:
 ```
 server {
@@ -127,6 +121,12 @@ server {
                 try_files $uri $uri/ =404;
         }
 }
+```
+
+Enable the file by creating a link from it to the sites-enabled directory:
+
+```shell
+sudo ln -s /etc/nginx/sites-available/tao.ren /etc/nginx/sites-enabled/
 ```
 
 
@@ -153,6 +153,11 @@ crontab -e
 Add the certbot command to run daily. In this example, we run the command every day at noon. The command checks to see if the certificate on the server will expire within the next 30 days, and renews it if so. The --quiet directive tells certbot not to generate output.
 ```
 0 12 * * * /usr/bin/certbot renew --quiet
+```
+
+Restart nginx server
+```
+sudo service nginx restart
 ```
 
 
