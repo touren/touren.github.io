@@ -291,6 +291,13 @@ global().async, index=3, from thread=<NSThread: 0x600001f29600>{number = 6, name
 
 After all these expirements, I decided to change our real project to use method `DispatchQueue.concurrentPerform`, and the result is pretty amazing, saving almost 50% loading time on my iPhone 6+, which has 2 CPU cores.
 
+* Before
+
+![image alt text](image_1.png)
+
+* After
+
+![image alt text](image_2.png)
 
 ## Takeaways
 
