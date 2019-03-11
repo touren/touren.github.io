@@ -7,6 +7,7 @@ tags:
     - AWS Application Pipeline
     - TeamCity
     - Best Practices
+    - DevOps
 ---
 <!-- Cumstomzie image style: having border, horizontal center, white background -->
 <style>
@@ -21,7 +22,7 @@ tags:
 
 # Goal
 
-Here at <a href="https://www.swarmnyc.com" target="_blank">SWARM</a>, our engineering team has agreed on the following goals for deploying applications into the wild.
+Here at <a href="https://www.swarmnyc.com" target="_blank">SWARM</a>, our engineering team & DevOps team have agreed on the following goals for deploying applications into the wild.
 
 * Automatic
 
