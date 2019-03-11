@@ -57,7 +57,11 @@ Here's the detail instructions<sup>[2](#footnote1)</sup>:
 1. Click Create script for Spreadsheet.
 1. Delete the placeholder content and paste the code from <a href="https://raw.githubusercontent.com/touren/YouTube_API/master/importJSON.gs" target="_blank">the customized script</a>.
 1. Rename the script to ImportJSON.gs and click the save button.
-1. Back in the spreadsheet, in a cell, you can type `=ImportHeaderRowJSON("https://raw.githubusercontent.com/touren/YouTube_API/master/query_report_view_by_day.json")`. The script will load the JSON data, parse it, format the columns and create a data table for you.
+1. Back in the spreadsheet, in a cell, you can type 
+```
+=ImportHeaderRowJSON("https://raw.githubusercontent.com/touren/YouTube_API/master/query_report_view_by_day.json")
+```
+The script will load the JSON data, parse it, format the columns and create a data table for you.
 1. You can create a chart on it now.
 
 Below is the 

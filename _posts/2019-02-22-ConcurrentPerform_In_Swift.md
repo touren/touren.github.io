@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "Under the hood: DispatchQueue.concurrentPerform [Swift4]"
+title: "Parallel For-Loop in Swift: DispatchQueue concurrentPerform"
 description: "What actually happen when you call DispatchQueue.concurrentPerform(iterations:execute:) in Swift."
 tags: 
     - ConcurrentPerform
+    - Parallel For-Loop
+    - Concurrent For-Loop
+    - DispatchQueue
     - GCD
     - Grand Central Dispatch
     - Swift
