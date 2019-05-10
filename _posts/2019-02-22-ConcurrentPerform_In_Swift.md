@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         DispatchQueue.concurrentPerform(iterations: threadCount, execute: { index in
             print("started index=\(index) thread=\(Thread.current)")
             // Download an image in a serial manner.
-            let url = URL(string: "https://touren.me/2018/01/16/image_0.png")
+            let url = URL(string: "https://taoren.me/2018/01/16/image_0.png")
             let _ = try? Data(contentsOf: url!)
             print("ended \(index)")
         })
@@ -259,7 +259,7 @@ Let's change the method `testConcurrence`, moving the image downloading code int
             let currentThread = Thread.current
             DispatchQueue.global().async {
                 // Download an image in a serial manner.
-                let url = URL(string: "https://touren.me/2018/01/16/image_0.png")
+                let url = URL(string: "https://taoren.me/2018/01/16/image_0.png")
                 let _ = try? Data(contentsOf: url!)
                 print("global().async index=\(index), from thread=\(currentThread), thread=\(Thread.current)")
             }

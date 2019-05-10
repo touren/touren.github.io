@@ -174,7 +174,7 @@ Your own blog hosted at home, [http://tao.ren][my blog]
 
 
 [let's encrypt with nginx]: https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
-[my blog]: https://touren.me
+[my blog]: https://taoren.me
 [jekyll offical]: https://jekyllrb.com/
 [install nginx]: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04-quickstart
 
